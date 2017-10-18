@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #-------------------------------------------------------------------------------
-""" spam_filter.py: Program to identify the word 'diagra' and its variants as spam """
+""" spam_checker.py: Program to identify the word 'diagra' and its variants as spam """
 
 __author__      = "Ankit Manerikar"
 __copyright__   = "Copyright (C) 2017, course homework - ECE 664 (Purdue)"
