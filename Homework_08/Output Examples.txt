@@ -1,0 +1,124 @@
+Output 1:
+=================================================
+ECE 664 Homework 8 - Sentence Parser using JavaCC
+Author:  Ankit Manerikar
+Program Time:	Sat Nov 04 22:25:55 EDT 2017
+-------------------------------------------------
+
+Generating Parser
+Current Input string:    time flies like an arrow.
+Testing Input String ...
+
+
+Parse Tree for Input String:
+
+      Sentence
+            `-->NP
+                  `-->CN
+            `-->VP
+                  `-->NP
+                        `-->CN
+Result: Input String Parsed
+=================================================
+
+
+Output 2:
+=================================================
+ECE 664 Homework 8 - Sentence Parser using JavaCC
+Author:  Ankit Manerikar
+Program Time:	Sat Nov 04 22:28:20 EDT 2017
+-------------------------------------------------
+
+Generating Parser
+Current Input string:    time flies like an arrow. the big cat stores a widget for large flies.
+Testing Input String ...
+
+
+Parse Tree for Input String:
+
+      Sentence
+            `-->NP
+                  `-->CN
+            `-->VP
+                  `-->NP
+                        `-->CN
+
+Parse Tree for Input String:
+
+      Sentence
+            `-->NP
+                  `-->CN
+            `-->VP
+                  `-->NP
+                        `-->CN
+                        `-->PP
+                              `-->NP
+                                    `-->CN
+Result: Input String Parsed
+=================================================
+
+
+Output 3:
+=================================================
+ECE 664 Homework 8 - Sentence Parser using JavaCC
+Author:  Ankit Manerikar
+Program Time:	Sat Nov 04 22:19:20 EDT 2017
+-------------------------------------------------
+
+Generating Parser
+Current Input string:    the time of this big cat flies like a precise arrow of fast flies with a large high quality widget.
+Testing Input String ...
+
+
+Parse Tree for Input String:
+
+      Sentence
+            `-->NP
+                  `-->CN
+                  `-->PP
+                        `-->NP
+                              `-->CN
+            `-->VP
+                  `-->NP
+                        `-->CN
+                        `-->PP
+                              `-->NP
+                                    `-->CN
+                                    `-->PP
+                                          `-->NP
+                                                `-->CN
+Result: Input String Parsed
+=================================================
+
+Output 4:
+=================================================
+ECE 664 Homework 8 - Sentence Parser using JavaCC
+Author:  Ankit Manerikar
+Program Time:	Sat Nov 04 22:29:58 EDT 2017
+-------------------------------------------------
+
+Generating Parser
+Current Input string:    is this a proper input string?
+Testing Input String ...
+
+Result: Input String Cannot be Parsed!
+Encountered " <DETERMINER> "a "" at line 1, column 9.
+Was expecting one of:
+    <NOUN> ...
+    <ADJ> ...
+    
+ParseException: Encountered " <DETERMINER> "a "" at line 1, column 9.
+Was expecting one of:
+    <NOUN> ...
+    <ADJ> ...
+    
+	at SentenceParser.generateParseException(SentenceParser.java:469)
+	at SentenceParser.jj_consume_token(SentenceParser.java:407)
+	at SentenceParser.CN(SentenceParser.java:213)
+	at SentenceParser.NP(SentenceParser.java:171)
+	at SentenceParser.VP(SentenceParser.java:265)
+	at SentenceParser.Sentence(SentenceParser.java:113)
+	at SentenceParser.Start(SentenceParser.java:55)
+	at SentenceParser.main(SentenceParser.java:30)
+=================================================
+

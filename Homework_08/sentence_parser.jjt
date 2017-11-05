@@ -1,0 +1,183 @@
+/******************************************************************************
+Program:		A JJT Parser for reading sentence with the specified grammar and 
+				displaying the parser tree for the same.
+			
+Date:			11/04/2017
+Written by: 	Ankit Manerikar
+Project:		ECE 664 - Homework 8
+
+Instructions for Use:
+
+******************************************************************************/
+
+PARSER_BEGIN(SentenceParser)
+
+/*Importing I/O and utility functions for the parser*/
+import java.io.*;
+import java.util.*;
+
+/* A Sentence-Parsing Grammar */
+
+public class SentenceParser {
+  
+  public static void main(String args[]) {
+  	/*Read argument text*/
+  	
+  	Date date = new Date();
+  	System.out.println("=================================================");
+  	System.out.println("ECE 664 Homework 8 - Sentence Parser using JavaCC");
+  	System.out.println("Author:  Ankit Manerikar");
+    System.out.println("Program Time:\t" + date.toString());
+  	System.out.println("-------------------------------------------------\n");
+    
+    Reader sr = new StringReader(args[0]);
+    
+	
+	/*Build parser */
+	System.out.println("Generating Parser");
+    SentenceParser curr_parser = new SentenceParser(sr);
+    System.out.println("Current Input string:    "+args[0]);
+
+    System.out.println("Testing Input String ...\n");
+   
+    /* Generate Parser Output */
+    try {
+      SimpleNode n = curr_parser.Start();      
+      System.out.println("Result: Input String Parsed");
+      System.out.println("=================================================");
+    } 
+    catch (Exception SentenceParserError) {
+      System.out.println("Result: Input String Cannot be Parsed!");
+      System.out.println(SentenceParserError.getMessage());
+      SentenceParserError.printStackTrace();
+      System.out.println("=================================================");
+    }
+  }
+}
+
+PARSER_END(SentenceParser)
+
+/******************************************************************************/
+
+
+/******************************************************************************/
+
+/*Characters to skip in the inut string*/
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+// Defining Tokens for the grammar ---------------------------------------------
+
+TOKEN:
+{
+	< DETERMINER: 
+		  "the" 		| "every" 		| "this"		| "a"		| "an"
+	>
+}
+//-------------------------------
+
+TOKEN:
+{
+	< NOUN: 
+		  "time" 		| "arrow" 		| "flies"		| "widget"		| "cat"
+	>
+}
+//-------------------------------
+
+TOKEN:
+{
+	< PRONOUN: 
+		  "I" 		| "we" 		| "this"	| "you"		| "us"
+	>
+}
+//-------------------------------
+
+TOKEN:
+{
+	< VERB: 
+		  "is" 			| "are" 		| "have"		| "has"
+		| "make"		| "time"		| "flies"		| "build"
+		| "stores"		| "buying"		| "like"
+	>
+}
+//-------------------------------
+
+TOKEN:
+{
+	< ADJ: 
+		  "big" 		| "high quality" 		| "fast"		| "large"
+		| "precise"		| "high"
+	>
+}
+//-------------------------------
+
+TOKEN:
+{
+	< PREPOSITION: 
+		  "with" 		| "without" 	| "for"		| "about"		
+		| "at"			| "after"		| "between"	| "but"			
+		| "below"		| "in"			| "into"	| "like"		
+		| "except"		| "following"	| "on"		| "than"		
+		| "over"		| "near"		| "of"		| "like"		
+		| "near"		| "since"		| "up"		| "upon"		
+		| "within"		| "by"
+	>
+}
+//-------------------------------
+
+TOKEN: /* Words */
+{
+	< WORD: (<LETTER>)+>
+	|
+	<#LETTER: ["a"-"z","A"-"Z"]>
+}
+//-------------------------------
+
+TOKEN: /* Separators*/
+{
+	< PERIOD: ".">
+}
+//-------------------------------
+
+/******************************************************************************/
+
+/** Main Production ***********************************************************/
+
+
+SimpleNode Start() : {}
+{
+  (Sentence()<PERIOD>)+
+  {return jjtThis;}
+}
+
+// 
+void Sentence() : {}
+{
+(NP())? VP()
+}
+
+void NP(): {}
+{
+(<PRONOUN> | ( (<DETERMINER>)?  (<ADJ>)*  CN()  )) 	(PP())?
+}
+
+void CN(): {}
+{
+<NOUN> (<NOUN>)?
+}
+
+void PP(): {}
+{
+<PREPOSITION> NP()
+}
+
+void VP(): {}
+{
+<VERB> NP()
+}
+/******************************************************************************/
