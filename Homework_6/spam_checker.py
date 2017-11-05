@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #-------------------------------------------------------------------------------
-""" spam_filter.py: Program to identify the word 'diagra' and its variants as spam """
+""" spam_checker.py: Program to identify the word 'diagra' and its variants as spam """
 
 __author__      = "Ankit Manerikar"
 __copyright__   = "Copyright (C) 2017, course homework - ECE 664 (Purdue)"
@@ -14,12 +14,31 @@ __email__       = "amanerik@purdue.edu"
 __status__      = "Prototype"
 #-------------------------------------------------------------------------------
 
+"""
+Instructions for Use:
+To use the program for checking spam keywords in given message file, open a 
+new terminal, navigate to the directory of the program and type:
+
+$ python spam_checker.py --file <location of the message file> 
+
+By default, the program will operate for the sample text file, 
+sample_text.txt provided in the program folder. 
+"""
+
+
 import time
 import re
 import os, argparse
 import numpy as np
 
 def check_spam_words(input_line):
+#-------------------------------------------------------------------------
+# Desc: 	 Function to check for spam for provided line
+# Args:      input_line - line for which spam is to be checked
+# Returns:   print_line - 'No Spam Keywords Detected.' - if no spam present
+#                        'Spam Keywords Detected!'  - if spam is present
+#            spam_flag - set to True if spam is detected
+#-------------------------------------------------------------------------
     spam_pattern =    r'^\s*d\s*([.]{,4}|[-]{,4})?\s*' + \
                            'i\s*([.]{,4}|[-]{,4})?\s*' + \
                            'a\s*([.]{,4}|[-]{,4})?\s*' + \
@@ -33,6 +52,11 @@ def check_spam_words(input_line):
         return ['Spam Keywords Detected!', True]
 
 def get_sys_args():
+#-------------------------------------------------------------------------
+# Desc: 	  Function to fetch system arguments
+# Args:       -
+# Returns:    file_loc - location of the text file
+#-------------------------------------------------------------------------
     
     parser = argparse.ArgumentParser(description='Spam Checker Program')    
     parser.add_argument('--file', metavar='DIR',
